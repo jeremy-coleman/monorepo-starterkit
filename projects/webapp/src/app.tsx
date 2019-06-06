@@ -63,7 +63,7 @@ const styles = (theme: Theme) =>
         // Use momentum-based scrolling on iOS devices
         WebkitOverflowScrolling: 'touch' as 'touch',
       },
-      '#root': {
+      '#coglite-app-root': {
         height: '100%',
         display: 'flex',
         flexDirection: 'column' as 'column',
@@ -97,7 +97,7 @@ export const App = withStyles(styles)((props: Props) => {
               <span>{count}</span>
             ))}
           </PastEvents>
-          <MyButton onClick={e => console.log('hi')} color={'black'} />
+          <MyButton onClick={e => console.log('hi')} color={'black'}>my button</MyButton>
         </Root>
       </div>
     </MuiThemeProvider>

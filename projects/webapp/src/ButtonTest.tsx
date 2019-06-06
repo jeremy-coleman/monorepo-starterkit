@@ -1,21 +1,20 @@
 import React from 'react'
 import { styled } from '@material-ui/styles'
+import Button from '@material-ui/core/Button'
+import {readableColor} from 'polished'
 
 type Props = {
   color: 'green' | 'black'
 }
 
-let MyButton = styled('button')((props: Props) => ({
+let MyButton = styled(Button as any)((props: Props) => ({
   backgroundColor: (props.color && props.color) || 'green',
+  color: readableColor(props.color)
 }))
 
-let NoPropsButton = styled('button')({
+let NoPropsButton = styled(Button)({
   backgroundColor: 'green',
 })
 
 export { MyButton, NoPropsButton }
 
-// tslint:disable: prettier
-//let Demo = props => <MyButton onClick={e => console.log('hi')} color={'black'} notaprop="qq" />
-
-let Demo = props => <MyButton onClick={e => console.log('hi')} color={'black'} />

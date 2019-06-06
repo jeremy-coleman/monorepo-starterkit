@@ -11,6 +11,7 @@
   },
   "author": "c",
   "dependencies": {
+    "polished":"3.4.0",
     "lape": "4.2.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",

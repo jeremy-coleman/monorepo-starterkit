@@ -26,7 +26,7 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
   integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
@@ -5305,6 +5305,13 @@ pkg-dir@^3.0.0:
   integrity sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==
   dependencies:
     find-up "^3.0.0"
+
+polished@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-3.4.0.tgz#29b2a028ee0408df5dded55a2a25e913bc6749a9"
+  integrity sha512-GiuavmunMIKMOEoSPkXoqBYM2ZcI4YIwCaiwmTOQ55Zq4HG2kD0YZt3WlLZ2l3U9XhJ1LM/fgjCFHHffiZP0YQ==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
 
 popper.js@^1.14.1:
   version "1.15.0"
