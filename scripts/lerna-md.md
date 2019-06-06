@@ -1,0 +1,37 @@
+Usage: cli.js <command> [options]
+
+Commands:
+  cli.js add <pkg> [globs..]  Add a single dependency to matched packages
+  cli.js bootstrap            Link local packages together and install remaining package dependencies
+  cli.js changed              List local packages that have changed since the last tagged release                                                                            [aliases: updated]  cli.js clean                Remove the node_modules directory from all packages
+  cli.js create <name> [loc]  Create a new lerna-managed package
+  cli.js diff [pkgName]       Diff all packages or a single package since the last release
+  cli.js exec [cmd] [args..]  Execute an arbitrary command in each package
+  cli.js import <dir>         Import a package into the monorepo with commit history
+  cli.js init                 Create a new Lerna repo or upgrade an existing repo to the current version of Lerna.
+  cli.js link                 Symlink together all packages that are dependencies of each other
+  cli.js list                 List local packages                                                                                                                         [aliases: ls, la, ll]  cli.js publish [bump]       Publish packages in the current project.
+  cli.js run <script>         Run an npm script in each package that contains that script
+  cli.js version [bump]       Bump version of packages changed since the last release.
+
+Global Options:
+  --loglevel       What level of logs to report.                                                                                                                       [string] [default: info]  --concurrency    How many processes to use when lerna parallelizes tasks.                                                                                              [number] [default: 16]  --reject-cycles  Fail if a cycle is detected among dependencies.                                                                                                                    [boolean]  --no-progress    Disable progress bars. (Always off in CI)                                                                                                                          [boolean]  --no-sort        Do not sort packages topologically (dependencies before dependents).                                                                                               [boolean]  --max-buffer     Set max-buffer (in bytes) for subcommand execution                                                                                                                  [number]  -h, --help       Show help                                                                                                                                                          [boolean]  -v, --version    Show version number                                                                                                                                                [boolean]
+When a command fails, all logs are written to lerna-debug.log in the current working directory.
+
+For more information, find our manual at https://github.com/lerna/lerna
+PS C:\Users\Administrator\Desktop\mono3\mui-starter> lerna run --help
+cli.js run <script>
+
+Run an npm script in each package that contains that script
+
+Positionals:
+  script  The npm script to run. Pass flags to send to the npm client after --                                                                                              [string] [required]
+Command Options:
+  --npm-client  Executable used to run scripts (npm, yarn, pnpm, ...).                                                                                                  [string] [default: npm]  --stream      Stream output with lines prefixed by package.                                                                                                                         [boolean]  --parallel    Run script with unlimited concurrency, streaming prefixed output.                                                                                                     [boolean]  --no-bail     Continue running script despite non-zero exit in a given package.                                                                                                     [boolean]  --no-prefix   Do not prefix streaming output.                                                                                                                                       [boolean]
+Filter Options:
+  --scope                          Include only packages with names matching the given glob.                                                                                           [string]  --ignore                         Exclude packages with names matching the given glob.                                                                                                [string]  --no-private                     Exclude packages with { "private": true } in their package.json.                                                                                   [boolean]  --since                          Only include packages that have been updated since the specified [ref].
+                                   If no ref is passed, it defaults to the most-recent tag.                                                                                            [string]  --include-filtered-dependents    Include all transitive dependents when running a command
+                                   regardless of --scope, --ignore, or --since.                                                                                                       [boolean]  --include-filtered-dependencies  Include all transitive dependencies when running a command
+                                   regardless of --scope, --ignore, or --since.                                                                                                       [boolean]
+Global Options:
+  --loglevel       What level of logs to report.                                                                                                                       [string] [default: info]  --concurrency    How many processes to use when lerna parallelizes tasks.                                                                                              [number] [default: 16]  --reject-cycles  Fail if a cycle is detected among dependencies.                                                                                                                    [boolean]  --no-progress    Disable progress bars. (Always off in CI)                                                                                                                          [boolean]  --no-sort        Do not sort packages topologically (dependencies before dependents).                                                                                               [boolean]  --max-buffer     Set max-buffer (in bytes) for subcommand execution                                                                                                                  [number]  -h, --help       Show help                                                                                                                                                          [boolean]  -v, --version    Show version number                   

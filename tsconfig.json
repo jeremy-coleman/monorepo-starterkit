@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "lib": ["dom","esnext"],
+    "target": "esnext",
+    "module": "esnext",
+    "jsx":"react",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "declaration": true,
+    "pretty": true,
+    "skipLibCheck": true
+  },
+  "include":["./packages/*/src"],
+  "exclude": ["node_modules"]
+}

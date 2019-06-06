@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "module":"esnext",
+        "target": "esnext",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "lib": ["esnext", "dom"],
+        "outDir": "./lib",
+        "skipLibCheck": true,
+        "rootDir": "./src",
+        "baseUrl": "./src"
+    },
+    "exclude": ["node_modules"],
+    "include": ["src"]
+}

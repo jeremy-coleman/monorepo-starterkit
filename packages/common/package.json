@@ -1,0 +1,27 @@
+{
+  "name": "@coglite/common",
+  "description": "Shared components",
+  "version": "0.0.1",
+  "author": "c",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "build:packages": "tsc -p tsconfig.json",
+    "start-watch": "tsc -w",
+    "clean:lib":"pnpx rimraf lib"
+  },
+  "dependencies": {
+    "@material-ui/core": "4.0.2",
+    "@material-ui/icons": "4.0.1",
+    "@material-ui/styles": "4.0.2",
+    "classnames": "2.2.6",
+    "history": "4.9.0",
+    "mobx": "5.10.0",
+    "mobx-react": "6.0.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+	  "tslib":"1.9.3"
+  },
+  "devDependencies": {}
+}
