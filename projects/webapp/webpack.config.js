@@ -4,6 +4,11 @@ const webpack = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 var CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 
+var jetpack = require('fs-jetpack')
+
+jetpack.remove('public')
+jetpack.copy('static', 'public', {overwrite: true})
+
 module.exports = {
   mode: 'development',
   stats: "minimal",
@@ -48,6 +53,7 @@ module.exports = {
   // },
   plugins: [
     new CleanObsoleteChunks(),
+    //new CopyPlugin([{from: __dirname + 'static', to: __dirname + 'public'}]),
     //new webpack.NamedModulesPlugin(),
     new ForkTsCheckerWebpackPlugin({
       workers: 1 //ForkTsCheckerWebpackPlugin.TWO_CPUS_FREE,
