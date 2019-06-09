@@ -1,4 +1,6 @@
-import { defaultTheme, Header } from '@coglite/common'
+import { defaultTheme, Header } from 'coglite/common'
+//import { defaultTheme, Header } from '@coglite/common'
+import {deepx} from 'coglite/common/deep'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import { styled, withTheme } from '@material-ui/styles'

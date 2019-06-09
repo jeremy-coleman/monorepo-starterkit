@@ -25,3 +25,5 @@ This will prevent node_module spam and aggregate everything into the root node_m
 
 some thoughts
 the webpack entry is pointed to the unbundled files. you could change it to the rollup bundled entry and keep hmr, you can concurrently run watch with rollup and webpack, it works, just not sure which is better or implications on hmr
+
+need to figure out how to import deep folders 

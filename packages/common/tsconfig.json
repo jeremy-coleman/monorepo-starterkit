@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
+        "declaration": true,
         "module":"esnext",
         "target": "esnext",
         "moduleResolution": "node",
         "jsx": "react",
         "lib": ["esnext", "dom"],
-        "outDir": "./lib",
+        "outDir": "../coglite/common",
         "skipLibCheck": true,
         "rootDir": "./src",
         "baseUrl": "./src"

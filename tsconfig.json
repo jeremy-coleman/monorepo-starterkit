@@ -16,6 +16,6 @@
     "pretty": true,
     "skipLibCheck": true
   },
-  "include":["./packages/*/src"],
+  "include":["./packages/*"],
   "exclude": ["node_modules"]
 }
