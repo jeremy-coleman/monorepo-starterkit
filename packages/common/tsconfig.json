@@ -7,7 +7,7 @@
         "moduleResolution": "node",
         "jsx": "react",
         "lib": ["esnext", "dom"],
-        "outDir": "../coglite/common",
+        "outDir": "lib",
         "skipLibCheck": true,
         "rootDir": "./src",
         "baseUrl": "./src"

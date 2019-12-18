@@ -1,8 +1,7 @@
-import { defaultTheme, Header } from 'coglite/common'
-//import { defaultTheme, Header } from '@coglite/common'
-import {deepx} from 'coglite/common/deep'
+//import { defaultTheme, Header } from 'coglite/common'
+import { defaultTheme, Header } from '@coglite/common'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import {ThemeProvider} from '@material-ui/core/styles'
 import { styled, withTheme } from '@material-ui/styles'
 import {state} from './state'
 import { configure } from 'mobx'
@@ -68,13 +67,13 @@ const styles = (theme: Theme) =>
       '#coglite-app-root': {
         height: '100%',
         display: 'flex',
-        flexDirection: 'column' as 'column',
+        flexDirection: 'column',
       },
     },
     root: {
       flex: 1,
       display: 'flex',
-      flexDirection: 'column' as 'column',
+      flexDirection: 'column',
     },
   })
 
@@ -85,11 +84,11 @@ const increment = e => {
   state.count = e.clientY
 }
 
-type Props = WithStyles<typeof styles>
+type Props = WithStyles<typeof styles> & {}
 
 export const App = withStyles(styles)((props: Props) => {
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <div className={props.classes.root}>
         <Header>Home</Header>
         <Root>
@@ -102,7 +101,7 @@ export const App = withStyles(styles)((props: Props) => {
           <MyButton onClick={e => console.log('hi')} color={'black'}>my button</MyButton>
         </Root>
       </div>
-    </MuiThemeProvider>
+    </ThemeProvider>
   )
 })
 

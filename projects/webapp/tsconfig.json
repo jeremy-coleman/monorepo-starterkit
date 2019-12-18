@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "_never",
     "moduleResolution": "node",
     "module": "esnext",
     "jsx": "react",

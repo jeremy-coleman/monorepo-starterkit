@@ -1,5 +1,5 @@
 var path = require('path');
-
+var tsc = require('rollup-plugin-typescript')
 var jetpack = require('fs-jetpack')
 
 const MONOREPO_CONSTANTS = {
@@ -7,6 +7,11 @@ const MONOREPO_CONSTANTS = {
       matching: ["./*/package.json"], 
       files: true,
       directories: false 
+    }),
+    SRC_DIRS: jetpack.find('packages', { 
+      matching: ["./*/src"], 
+      files: false,
+      directories: true 
     }),
     LIBS: jetpack.find('packages', { 
       matching: ["./*/lib"], 
@@ -52,7 +57,10 @@ async function main() {
     
     const basePath = path.relative(__dirname, pkg)
     console.log('basepath', basePath)
-    const pkgEntryFileArray = path.join(basePath, 'lib/index.js');
+
+    //const pkgEntryFileArray = path.join(basePath, 'lib/index.js');
+    const pkgEntryFileArray = path.join(basePath, 'src/index.ts');
+
     console.log('pkgEntryFileArray', pkgEntryFileArray)
 
     const bundlePath = basePath.replace('packages', 'bundles')
@@ -60,6 +68,9 @@ async function main() {
       //console.log(pkg.location)
 
       //console.log(input)
+
+    const PKG_PATH_FRAGMENTS = basePath.split('\\').concat("lib", "index.js")
+    console.log(PKG_PATH_FRAGMENTS)
 
     results.push({
         treeshake: {
@@ -70,15 +81,24 @@ async function main() {
         input: pkgEntryFileArray,
         output: [
             {
-                file: path.join(__dirname, bundlePath, "index.js"),
+                file: path.join(__dirname, ...PKG_PATH_FRAGMENTS),
                 format: 'esm',
                 globals: globals,
             },
         ],
         preserveModules: false,
-        
+        //globals:globals,
         external: EXTERNALS,
-        plugins: [],
+        plugins: [
+          tsc()
+        ],
+
+        onwarn: function ( message ) {
+          if ( /external dependency/.test( message ) ) {return;}
+          if (message.code === 'CIRCULAR_DEPENDENCY') {return;}
+          console.error( message );
+        },
+        
     });
  });
 

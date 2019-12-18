@@ -20,7 +20,7 @@ const overrides: Overrides = {
 export function defaultTheme(): Theme {
     const palette: PaletteOptions = {
         primary: {
-            main: blue[900]
+            main: blue[800]
         },
         secondary: {
             main: pink.A400

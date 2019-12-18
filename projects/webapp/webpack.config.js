@@ -12,7 +12,7 @@ jetpack.copy('static', 'public', {overwrite: true})
 module.exports = {
   mode: 'development',
   stats: "minimal",
-  devtool: 'inline-source-map',
+  //devtool: 'inline-source-map',
   entry: './src/index.tsx',
   output: {
     filename: '[name].js',
@@ -34,6 +34,7 @@ module.exports = {
         options: {
           transpileOnly: true,
           experimentalWatchApi: true,
+          experimentalFileCaching: false
         },
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'src'),
