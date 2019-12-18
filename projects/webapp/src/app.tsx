@@ -10,7 +10,7 @@ import React from 'react'
 import { MyButton } from './ButtonTest'
 
 // Enable strict mode for MobX. This disallows state changes outside of an action
-configure({ enforceActions: true })
+configure({ enforceActions: "observed" })
 
 const theme = defaultTheme()
 

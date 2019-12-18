@@ -11,8 +11,8 @@
   },
   "author": "c",
   "dependencies": {
+    "preact":"10.1.1",
     "polished":"3.4.2",
-    "coglite":"*",
     "lape": "4.2.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",

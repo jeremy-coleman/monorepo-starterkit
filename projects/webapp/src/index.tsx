@@ -13,3 +13,5 @@ if ((module as any).hot) {
 const AppRoot = connect(App)
 
 render(<AppRoot />, node)
+
+console.log(React.Component.prototype)

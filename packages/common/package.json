@@ -9,7 +9,10 @@
   "scripts1": {
     "build:packages": "tsc -p tsconfig.json",
     "start-watch": "tsc -w",
-    "clean:lib":"npx rimraf lib"
+    "clean:lib":"rimraf lib"
+  },
+  "scripts":{
+    "prettify":"pprettier --write 'src/**/*.{ts,tsx,json,scss}' "
   },
   "dependencies": {
     "@material-ui/core": "4.8.0",

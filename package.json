@@ -23,10 +23,11 @@
     "start-watch":"run-p rollit start",
     "dist":"run-s clean build rollit",
     "update-deps":"lerna exec npx upd --stream --parallel",
-    "prettify": "prettier --print-width 140 --tab-width 2 --single-quote --write 'packages/*/src/**/{*.js,*.ts*}'",
+    "prettify": "pprettier --write packages/*/src/**/{*.js,*.jsx,*.ts,*.tsx}",
     "lint": "tslint -c ./tslint.json -p ./tsconfig.json --fix"
   },
   "devDependencies": {
+    "lerna-runner": "0.0.5",
     "lerna": "3.19.0",
     "prettier": "^1.19.1",
     "@types/classnames": "2.2.9",
@@ -49,7 +50,10 @@
     "npm-run-all":"4.1.5",
     "fs-jetpack":"2.2.3",
     "rollup":"1.27.13",
-    "rollup-plugin-typescript":"1.0.1"
+    "@mixer/parallel-prettier": "1.0.0",
+    "@rollup/plugin-alias": "2.2.0",
+    "@rollup/plugin-typescript": "2.0.1",
+    "@rollup/plugin-run": "1.1.0"
   },
   "prettier": {
     "tabWidth": 2,
