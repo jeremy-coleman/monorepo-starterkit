@@ -24,7 +24,7 @@
     "start": "lerna run start-watch --parallel",
     "start-watch": "run-p rollit start",
     "update-deps": "lerna exec npx upd --stream --parallel",
-    "runner":"lerna-runner"
+    "prompt":"lerna-runner"
   },
   "prettier": {
     "printWidth": 120,

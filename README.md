@@ -5,7 +5,8 @@ Getting Started
 ---------------
 ```bash
 $ npm run bootstrap
-$ npm run start -> prompt -> @coglite/webapp -> start
+$ npm run prompt -> -> @coglite/webapp -> start
+$ npm run prompt -> stockroom-demo -> start
 ```
 
 Parallel Prettify
