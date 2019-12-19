@@ -14,8 +14,8 @@
       "@state": ["src/state"],
       "@components/*": ["src/components/*"]
     },
-    "skipLibCheck": true,
     "experimentalDecorators":true,
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
