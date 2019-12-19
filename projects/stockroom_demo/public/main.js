@@ -13,7 +13,7 @@
 /******/ 	function hotDownloadUpdateChunk(chunkId) {
 /******/ 		var script = document.createElement("script");
 /******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "17b3170-" + chunkId + "-wps-hmr.js";
+/******/ 		script.src = __webpack_require__.p + "17bd008-" + chunkId + "-wps-hmr.js";
 /******/ 		if (null) script.crossOrigin = null;
 /******/ 		document.head.appendChild(script);
 /******/ 	}
@@ -27,7 +27,7 @@
 /******/ 			}
 /******/ 			try {
 /******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "17b3170-wps-hmr.json";
+/******/ 				var requestPath = __webpack_require__.p + "17bd008-wps-hmr.json";
 /******/ 				request.open("GET", requestPath, true);
 /******/ 				request.timeout = requestTimeout;
 /******/ 				request.send(null);
@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e401c754bfd90e721781";
+/******/ 	var hotCurrentHash = "8bbfd13743c65eff7778";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1182,7 +1182,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /*!***********************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/lerna-demos/monorepo-starterkit/node_modules/preact/compat/dist/compat.module.js ***!
   \***********************************************************************************************************************/
-/*! exports provided: createElement, createContext, createRef, Fragment, Component, default, version, Children, render, hydrate, unmountComponentAtNode, createPortal, createFactory, cloneElement, isValidElement, findDOMNode, PureComponent, memo, forwardRef, unstable_batchedUpdates, Suspense, SuspenseList, lazy, useState, useReducer, useEffect, useLayoutEffect, useRef, useImperativeHandle, useMemo, useCallback, useContext, useDebugValue */
+/*! exports provided: useState, useReducer, useEffect, useLayoutEffect, useRef, useImperativeHandle, useMemo, useCallback, useContext, useDebugValue, createElement, createContext, createRef, Fragment, Component, default, version, Children, render, hydrate, unmountComponentAtNode, createPortal, createFactory, cloneElement, isValidElement, findDOMNode, PureComponent, memo, forwardRef, unstable_batchedUpdates, Suspense, SuspenseList, lazy */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1256,7 +1256,7 @@ eval("var t=__webpack_require__(/*! preact */ \"../../node_modules/preact/dist/p
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\n\n/**\n * @note This file exists merely as an easy reference for folks adding it to their configuration entries\n */\n\n(() => {\n  /* eslint-disable global-require */\n  const { run } = __webpack_require__(/*! ./lib/client/client */ \"../../node_modules/webpack-plugin-serve/lib/client/client.js\");\n  let hash = '<unknown>';\n  let options;\n  try {\n    options = {\"compress\":null,\"headers\":null,\"historyFallback\":false,\"hmr\":true,\"host\":\"localhost\",\"liveReload\":false,\"log\":{\"level\":\"info\",\"prefix\":{\"template\":\"{{level}}\"},\"name\":\"webpack-plugin-serve\"},\"open\":true,\"port\":3000,\"progress\":\"minimal\",\"ramdisk\":false,\"secure\":false,\"static\":\"public\",\"status\":true,\"address\":\"localhost:3000\",\"compilerName\":null,\"wpsId\":\"17b3170\"};\n  } catch (e) {\n    const { log } = __webpack_require__(/*! ./lib/client/log */ \"../../node_modules/webpack-plugin-serve/lib/client/log.js\");\n    log.error(\n      'The entry for webpack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'\n    );\n  }\n\n  try {\n    // eslint-disable-next-line camelcase\n    hash = __webpack_require__.h();\n  } catch (e) {} // eslint-disable-line no-empty\n\n  run(hash, options);\n})();\n\n\n//# sourceURL=webpack:///(webpack)-plugin-serve/client.js?");
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\n\n/**\n * @note This file exists merely as an easy reference for folks adding it to their configuration entries\n */\n\n(() => {\n  /* eslint-disable global-require */\n  const { run } = __webpack_require__(/*! ./lib/client/client */ \"../../node_modules/webpack-plugin-serve/lib/client/client.js\");\n  let hash = '<unknown>';\n  let options;\n  try {\n    options = {\"compress\":null,\"headers\":null,\"historyFallback\":false,\"hmr\":true,\"host\":\"localhost\",\"liveReload\":false,\"log\":{\"level\":\"info\",\"prefix\":{\"template\":\"{{level}}\"},\"name\":\"webpack-plugin-serve\"},\"open\":true,\"port\":3000,\"progress\":\"minimal\",\"ramdisk\":false,\"secure\":false,\"static\":\"public\",\"status\":true,\"address\":\"localhost:3000\",\"compilerName\":null,\"wpsId\":\"17bd008\"};\n  } catch (e) {\n    const { log } = __webpack_require__(/*! ./lib/client/log */ \"../../node_modules/webpack-plugin-serve/lib/client/log.js\");\n    log.error(\n      'The entry for webpack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'\n    );\n  }\n\n  try {\n    // eslint-disable-next-line camelcase\n    hash = __webpack_require__.h();\n  } catch (e) {} // eslint-disable-line no-empty\n\n  run(hash, options);\n})();\n\n\n//# sourceURL=webpack:///(webpack)-plugin-serve/client.js?");
 
 /***/ }),
 

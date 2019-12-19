@@ -10,7 +10,6 @@
   "license": "MIT",
   "author": "Jeremy Coleman",
   "workspaces": [
-    "packages/*",
     "projects/*"
   ],
   "scripts": {
