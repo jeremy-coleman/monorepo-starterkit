@@ -1,5 +1,8 @@
+//https://github.com/rollup/awesome
+
 var path = require('path')
 var tsc = require('@rollup/plugin-typescript')
+var globalze = require("rollup-plugin-external-globals")
 var jetpack = require('fs-jetpack')
 
 const MONOREPO_CONSTANTS = {
@@ -71,7 +74,11 @@ async function main() {
         {
           file: LIB_OUTPUT_FILE,
           format: 'esm',
-          globals: globals,
+          //globals: globals,
+          globals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM',
+          },
         },
 
         //uncomment for .cjs output. Node will load .cjs as commonjs even if closest package.json is type:"module"
@@ -85,7 +92,13 @@ async function main() {
       ],
       preserveModules: false,
       external: EXTERNALS,
-      plugins: [tsc()],
+      plugins: [
+        tsc(),
+        globalze({
+          jquery: "$",
+          //'react': "React"
+        })
+      ],
 
       onwarn: function(message) {
         if (/external dependency/.test(message)) {

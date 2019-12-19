@@ -6,14 +6,6 @@
   "license": "MIT",
   "main": "lib/index.js",
   "types": "src/index.ts",
-  "scripts1": {
-    "build:packages": "tsc -p tsconfig.json",
-    "start-watch": "tsc -w",
-    "clean:lib":"rimraf lib"
-  },
-  "scripts":{
-    "prettify":"pprettier --write 'src/**/*.{ts,tsx,json,scss}' "
-  },
   "dependencies": {
     "@material-ui/core": "4.8.0",
     "@material-ui/icons": "4.5.1",
@@ -24,7 +16,7 @@
     "mobx-react": "6.1.4",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-	  "tslib":"1.10.0"
+    "tslib":"1.10.0"
   },
   "devDependencies": {}
 }

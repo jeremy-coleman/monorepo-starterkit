@@ -10,7 +10,6 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 let Header = props => (createElement(AppBar, { position: "static" },
     createElement(Toolbar, { variant: "dense" },
         createElement(Typography, { variant: "h6", color: "inherit" }, props.children))));
-//# sourceMappingURL=header.js.map
 
 const paletteType = 'light';
 const overrides = {
@@ -38,6 +37,5 @@ function defaultTheme() {
 }
 
 let deepx = 42;
-//# sourceMappingURL=index.js.map
 
 export { Header, deepx, defaultTheme };
