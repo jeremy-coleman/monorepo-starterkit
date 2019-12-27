@@ -9,14 +9,13 @@
   "author": "c",
   "dependencies": {
     "preact":"10.1.1",
-    "worker-loader": "^2.0.0",
+    "worker-loader": "2.0.0",
     "stockroom": "1.0.1",
-    "preact-material-components": "^1.6.1",
-    "unistore": "^3.5.1",
+    "preact-material-components": "1.6.1",
+    "unistore": "3.5.1",
     "css-loader": "3.4.0",
-    "style-loader": "1.0.2",
+    "style-loader": "1.1.2",
     "file-loader": "5.0.2",
-    "webpack-merge": "4.2.2",
     "webpack-plugin-serve": "0.12.1"
   },
   "devDependencies": {}
