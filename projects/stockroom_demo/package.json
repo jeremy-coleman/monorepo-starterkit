@@ -4,7 +4,7 @@
   "description": "e",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-serve ./webpack.config.js --host=localhost --port=3000 --open --static=public --silent --progress='minimal'"
+    "start": "webpack --config=webpack.config.js"
   },
   "author": "c",
   "dependencies": {
@@ -15,7 +15,9 @@
     "unistore": "^3.5.1",
     "css-loader": "3.4.0",
     "style-loader": "1.0.2",
-    "file-loader": "5.0.2"
+    "file-loader": "5.0.2",
+    "webpack-merge": "4.2.2",
+    "webpack-plugin-serve": "0.12.1"
   },
   "devDependencies": {}
 }
