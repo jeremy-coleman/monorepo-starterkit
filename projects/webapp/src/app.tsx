@@ -1,16 +1,16 @@
 //import { defaultTheme, Header } from 'coglite/common'
 import { defaultTheme, Header } from '@coglite/common'
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles'
-import {ThemeProvider} from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles'
 import { styled, withTheme } from '@material-ui/styles'
-import {state} from './state'
+import { state } from './state'
 import { configure } from 'mobx'
 import React from 'react'
 
 import { MyButton } from './ButtonTest'
 
 // Enable strict mode for MobX. This disallows state changes outside of an action
-configure({ enforceActions: "observed" })
+configure({ enforceActions: 'observed' })
 
 const theme = defaultTheme()
 
@@ -98,7 +98,9 @@ export const App = withStyles(styles)((props: Props) => {
               <span>{count}</span>
             ))}
           </PastEvents>
-          <MyButton onClick={e => console.log('hi')} color={'black'}>my button</MyButton>
+          <MyButton onClick={e => console.log('hi')} color={'black'}>
+            my button
+          </MyButton>
         </Root>
       </div>
     </ThemeProvider>

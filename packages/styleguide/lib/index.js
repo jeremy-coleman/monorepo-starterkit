@@ -36,6 +36,4 @@ function defaultTheme() {
     return createMuiTheme({ palette, overrides });
 }
 
-let deepx = 42;
-
-export { Header, deepx, defaultTheme };
+export { Header, defaultTheme };

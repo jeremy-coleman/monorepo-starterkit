@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@coglite/*": ["src/packages/*"]
+    },
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "lib": ["dom","dom.iterable","esnext"],
+    "target": "esnext",
+    "allowJs": true,
+    "checkJs": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": false,
+    "pretty": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "plugins": [
+      { "name": "typescript-tslint-plugin" }
+    ]
+  },
+  "include": ["src", "types/*.d.ts"],
+  "exclude": ["node_modules", "z"]
+}

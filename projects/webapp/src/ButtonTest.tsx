@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@material-ui/styles'
 import Button from '@material-ui/core/Button'
-import {readableColor} from 'polished'
+import { readableColor } from 'polished'
 
 type Props = {
   color: 'green' | 'black'
@@ -9,7 +9,7 @@ type Props = {
 
 let MyButton = styled(Button as any)((props: Props) => ({
   backgroundColor: (props.color && props.color) || 'green',
-  color: readableColor(props.color)
+  color: readableColor(props.color),
 }))
 
 let NoPropsButton = styled(Button)({
@@ -17,4 +17,3 @@ let NoPropsButton = styled(Button)({
 })
 
 export { MyButton, NoPropsButton }
-

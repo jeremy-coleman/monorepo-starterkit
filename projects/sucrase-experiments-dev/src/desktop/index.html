@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../app-web/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../app-web/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../app-web/css/main.css">
+</head>
+
+<body>
+	<div id="application">gulp</div>
+	<script>
+		require('sucrase/register')
+		//require('@babel/register')({presets: ['@babel/env','@babel/react']});
+		require('../app-web/jsx/main.tsx');
+		const {remote} = require('electron')
+		document.title = 'Electron Gulp Runner ' + remote.app.getVersion(),
+		document.ondragover = document.ondragleave = document.ondragend = document.ondrop = function (event) {
+		event.preventDefault();
+		return false;
+	}
+	</script>
+</body>
+</html>

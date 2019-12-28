@@ -1,6 +1,6 @@
-let store;
+let store
 
-const interopRequire = m => m.default || m;
+const interopRequire = m => m.default || m
 
 // This is an example of skipping the Worker entirely during SSR/Prerendering:
 // if (PRERENDER) {
@@ -8,8 +8,8 @@ const interopRequire = m => m.default || m;
 // 	store = createStore(interopRequire(require('./store-worker')));
 // }
 // else {
-	let createStore = interopRequire(require('stockroom'));
-	store = createStore(require('worker-loader!./store-worker')());
+let createStore = interopRequire(require('stockroom'))
+store = createStore(require('worker-loader!./store-worker')())
 //}
 
-export default store;
+export default store

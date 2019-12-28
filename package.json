@@ -18,7 +18,7 @@
     "clean": "lerna run clean:packages --parallel",
     "dist": "run-s clean build rollit",
     "lint": "tslint -c ./tslint.json -p ./tsconfig.json --fix",
-    "prettify": "pprettier --write packages/*/src/**/{*.js,*.jsx,*.ts,*.tsx}",
+    "prettify": "pprettier --write projects/*/src/**/{*.js,*.jsx,*.ts,*.tsx}",
     "rollit": "rollup -c rollup.bundles.js -w",
     "frollit": "fancy-rollup -c rollup.bundles.js",
     "start1": "lerna run start-watch --parallel",

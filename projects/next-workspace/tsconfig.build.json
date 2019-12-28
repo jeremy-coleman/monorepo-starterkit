@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "declaration": false,
+    "outDir": "app",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react",
+    "allowJs": true,
+    "checkJs": false,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "preserveWatchOutput": true,
+    "watch": false,
+    "incremental": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "lib": ["dom","esnext", "dom.iterable", "webworker", "webworker.importscripts"]
+  },
+  "include": ["src","types"],
+  "exclude": ["**/node_modules/**/*", "node_modules", "**/.next/**/*", "src/client", "src/app"]
+}

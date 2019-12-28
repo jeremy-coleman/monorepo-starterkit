@@ -1,8 +1,7 @@
 import React from 'react'
 import { styled } from '@material-ui/styles'
 
-import {state} from '@state'
-
+import { state } from '@state'
 
 const Root = styled('div')({
   display: 'grid',
