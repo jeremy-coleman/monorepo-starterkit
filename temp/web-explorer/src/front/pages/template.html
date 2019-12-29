@@ -1,0 +1,35 @@
+<h1>Template</h1>
+
+<p app-playground-anchor="html">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+<p app-playground-anchor="css">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+<p app-playground-anchor="js">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+
+<div app-playground="html">
+  <table id="my-table"><tbody></tbody></table>
+
+  <template id="my-template">
+    <tr><td></td><td></td></tr>
+  </template>
+</div>
+
+<style app-playground="css">
+  th, td { border: 1px solid #ddd; }
+  .special { background-color: #eee; }
+</style>
+
+<script app-playground="js" app-script-defer>
+  const tbody = document.querySelector('#my-table tbody');
+  const template = document.querySelector('#my-template');
+
+  [['Hello', 'World!'], ['Looks', 'Good!']].forEach(([cell1, cell2]) => {
+    const clone = document.importNode(template.content, true);
+
+    const td = clone.querySelectorAll('td');
+    td[0].textContent = cell1;
+    td[1].textContent = cell2;
+
+    tbody.appendChild(clone);
+  });
+</script>

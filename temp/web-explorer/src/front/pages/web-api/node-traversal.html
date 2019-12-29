@@ -1,0 +1,156 @@
+<h1 class="app-no-margin-top">Node (traversal)</h1>
+
+<p>
+  The <code>Node</code> interface is about relations between DOM elements.
+  In this section you will learn how to implement DOM traversal.
+</p>
+
+<div app-playground="demo">
+  <div id="root">
+    Level 1
+    <div>
+      Level 1.1
+      <div>Level 1.1.1</div>
+      <div>Level 1.1.2</div>
+    </div>
+    <div>
+      Level 1.2
+      <div>Level 1.2.1</div>
+    </div>
+    <div>
+      Level 1.3
+      <div>Level 1.3.1</div>
+      <div>Level 1.3.2</div>
+      <div>Level 1.3.3</div>
+    </div>
+  </div>
+
+  <div id="actions">
+    <button data-direction="up">&uparrow;</button>
+    <br>
+    <button data-direction="left">&leftarrow;</button>
+    <button data-direction="right">&rightarrow;</button>
+    <br>
+    <button data-direction="down">&downarrow;</button>
+  </div>
+</div>
+
+<p>
+  In this demo, the <code>#root</code> part is the DOM fragment we want to traverse.
+  The <code>#actions</code> part lets you use <code>button</code> elements to navigate inside this DOM fragment.
+</p>
+
+<div app-playground-anchor="demo"></div>
+
+<p>
+  Let's add some style...
+</p>
+
+<style app-playground>
+  #root, #root * {
+    margin: 0.3rem 0.6rem;
+    padding: 0.3rem 0.6rem;
+    border-width: 1px;
+    border-style: dashed;
+  }
+
+  #root { border-color: green; }
+  #root > * { border-color: blue; }
+  #root > * > * { border-color: red; }
+
+  #actions { text-align: center; }
+
+  .highlight { background-color: yellow; }
+</style>
+
+<p>Here is the list of properties of the Node interface that allow you to traverse the DOM:</p>
+<ul>
+  <li><code>Node.parentNode</code></li>
+  <li><code>Node.parentElement</code></li>
+  <li><code>Node.previousSibling</code></li>
+  <li><code>Node.nextSibling</code></li>
+  <li><code>Node.childNodes</code></li>
+  <li><code>Node.firstChild</code></li>
+  <li><code>Node.lastChild</code></li>
+</ul>
+
+<p>Here is the list of other properties of the Node interface that we are using in this demo:</p>
+<ul>
+  <li><code>Node.nodeName</code></li>
+  <li><code>Node.nodeType</code></li>
+  <li><code>Node.textContent</code></li>
+</ul>
+
+<p>There's also some important Node interface constants:</p>
+<ul>
+  <li><code>Node.ELEMENT_NODE</code></li>
+  <li><code>Node.ATTRIBUTE_NODE</code></li>
+  <li><code>Node.TEXT_NODE</code></li>
+  <li><code>Node.textContent</code></li>
+</ul>
+
+<p>The following script uses some of these properties to implement our DOM fragment traversal.</p>
+
+<script app-playground>
+  var root = document.getElementById('root');
+  var node = root;
+  node.classList.add('highlight'); // `node` is our current highlighted node
+
+  function moveTo(target) {
+    node.classList.remove('highlight');
+    target.classList.add('highlight');
+    Playground.log(`Moved "${target.firstChild.textContent.trim()}"`, 'demo');
+    node = target;
+  }
+
+  function noMoveTo(direction) {
+    Playground.log(`Can not go ${direction}!`, 'demo');
+  }
+
+  document.getElementById('actions').addEventListener('click', function(event) {
+    if (event.target.nodeName === 'BUTTON') {
+      const direction = event.target.dataset.direction; // Get the value of `data-direction` attribute
+      if (node === root && direction !== 'down') {
+        noMoveTo(direction);
+        return;
+      }
+      switch (direction) {
+        case 'up': {
+          moveTo(node.parentNode);
+          break;
+        }
+        case 'left': {
+          let target = node;
+          while ((target = target.previousSibling) && (target.nodeType !== Node.ELEMENT_NODE)) {}
+          target ? moveTo(target) : noMoveTo(direction);
+          break;
+        }
+        case 'right': {
+          let target = node;
+          while ((target = target.nextSibling) && (target.nodeType !== Node.ELEMENT_NODE)) {}
+          target ? moveTo(target) : noMoveTo(direction);
+          break;
+        }
+        case 'down': {
+          const childs = node.childNodes;
+          let target;
+          for (let i = 0; i < childs.length; i++) {
+            if (childs[i].nodeType === Node.ELEMENT_NODE) {
+              target = childs[i];
+              break;
+            }
+          }
+          target ? moveTo(target) : noMoveTo(direction);
+
+          /*// Alternative implementation
+          let target = node.firstChild;
+          while (target && (target.nodeType !== Node.ELEMENT_NODE)) {
+            target = target.nextSibling;
+          }
+          target ? moveTo(target) : noMoveTo(direction);*/
+          break;
+        }
+      }
+    }
+  });
+</script>

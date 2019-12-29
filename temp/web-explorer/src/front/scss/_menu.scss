@@ -1,0 +1,98 @@
+.app-menu {
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+
+  .app-menu {
+    margin-top: 0;
+  }
+}
+
+.app-menu__item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.app-menu__link {
+  @extend a;
+
+  display: block;
+  padding: 0.5rem 0.75rem;
+  transition: all var(--transition-duration) ease;
+
+  &:hover {
+    background-color: var(--link-bg-color-hover);
+  }
+
+  &, &:hover, &:active, &:focus {
+    text-decoration: none;
+  }
+}
+
+[app-menu] {
+  .app-menu__header {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.app-menu__header {
+  display: block;
+  padding: 0.5rem 0.75rem;
+
+  &::before {
+    position: absolute;
+    font-family: Font Awesome\ 5 Free;
+    font-weight: 900;
+    content: "\f107";
+    transition: transform var(--transition-duration) ease;
+  }
+}
+
+.app-menu__header--closed {
+  &::before {
+    transform: rotate(-90deg);
+  }
+
+  + .app-menu {
+    display: none;
+  }
+}
+
+.app-menu {
+  .app-menu__header::before {
+    left: 0.75rem;
+  }
+  .app-menu__header,
+  .app-menu .app-menu__link {
+    padding-left: 2rem;
+  }
+
+  .app-menu {
+    .app-menu__header::before {
+      left: 2.25rem;
+    }
+    .app-menu__header,
+    .app-menu .app-menu__link {
+      padding-left: 3.5rem;
+    }
+
+    .app-menu {
+      .app-menu__header::before {
+        left: 3.75rem;
+      }
+      .app-menu__header,
+      .app-menu .app-menu__link {
+        padding-left: 5rem;
+      }
+    }
+  }
+}
+
+// Note: the class `.app-link__active` comes from the directive `[app-link]`.
+// For this reason, it's not named `.app-menu__item--active` as you would have expected...
+.app-menu .app-link__active {
+  background-color: var(--link-bg-color-active);
+  color: var(--text-color);
+}

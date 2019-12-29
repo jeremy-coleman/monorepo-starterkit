@@ -1,0 +1,34 @@
+<h1 class="app-no-margin-top">Everything is Object</h1>
+
+<p>
+  In the section
+  <a app-link href="./pages/introduction/behavior-attachment.html">Behavior attachment</a>
+  you learn that the DOM element have a strong class inheritance.
+  <br>
+  In this section, we delve deeper into each of these interfaces:
+  <code>Object</code>, <code>EventTarget</code>, <code>Node</code>, <code>Element</code>, <code>HTMLElement</code>.
+</p>
+
+<p>Let's start by considering that a DOM element is nothing less than a simple JavaScript object.</p>
+
+<div app-playground>
+  <span id="hello">Hello world!</span>
+</div>
+
+<script app-playground app-script-defer>
+  var hello = document.getElementById('hello');
+
+  // Set property
+  hello.world = {
+    hello: 'Hello',
+    world: 'World!',
+    now: new Date()
+  };
+
+  // Get property
+  var value = hello.world;
+
+  Playground.log(JSON.stringify(value, undefined, 2));
+</script>
+
+<p>In this demo, we check that the JavaScript property <code>world</code> we have set on the DOM element <code>hello</code> is accessible.</p>

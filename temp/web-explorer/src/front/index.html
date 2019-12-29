@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="app-grid app-grid--fixed">
+<head>
+
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width,initial-scale=1">
+
+  <title>WebExplorer</title>
+
+  <base href="/">
+
+  <meta name="theme-color" content="dodgerblue">
+  <link rel="manifest" href="./manifest.json">
+
+  <link rel="shortcut icon" href="./assets/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+
+</head>
+<body>
+
+  <div class="app-grid__wrap">
+    <header class="app-grid__header app-header">
+      <div class="app-header__toggle-sidebar" app-sidebar-toggle>
+        <i class="fas fa-bars fa-fw fa-lg"></i>
+      </div>
+
+      <a href="./" class="app-header__brand">
+        WebExplorer <i class="fab fa-lg fa-html5"></i>
+      </a>
+    </header>
+
+    <aside class="app-grid__sidebar" app-sidebar></aside>
+
+    <main class="app-grid__content" app-spinner>
+      <div class="app-content" app-content></div>
+    </main>
+
+    <footer class="app-grid__footer">
+      <div app-toolbox></div>
+    </footer>
+  </div>
+
+</body>
+</html>

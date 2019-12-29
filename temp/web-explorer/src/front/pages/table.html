@@ -1,0 +1,58 @@
+<header app-code-hidden>
+  <b><i class="fas fa-tags"></i> tags:</b>
+  <code>caption</code>
+  <code>col</code>
+  <code>colgroup</code>
+  <code>table</code>
+  <code>tbody</code>
+  <code>td</code>
+  <code>tfoot</code>
+  <code>th</code>
+  <code>thead</code>
+  <code>tr</code>
+</header>
+
+<h1>Table</h1>
+
+<p>The elements here are used to create and handle tabular data.</p>
+
+<div app-playground>
+  <table>
+    <caption>Caption</caption>
+    <colgroup>
+      <col>
+      <col class="special">
+    </colgroup>
+    <thead>
+      <tr><th colspan="2">Header</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2">Body (left column, 2 rows)</td>
+        <td>Body (right column, row 1)</td>
+      </tr>
+      <tr>
+        <td>Body (right column, row 2)</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><th colspan="2">Footer</th></tr>
+    </tfoot>
+  </table>
+</div>
+
+<style app-playground>
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.5rem;
+  }
+  .special {
+    background-color: #eee;
+  }
+</style>
+
+<style app-playground>
+  table {
+    border-collapse: collapse;
+  }
+</style>

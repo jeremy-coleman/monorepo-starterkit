@@ -1,0 +1,13 @@
+.app-content {
+  opacity: 0.3;
+  transition: opacity 300ms ease;
+}
+
+.app-content--active {
+  opacity: 1;
+}
+
+.app-content__error {
+  text-align: center;
+  color: #aaa;
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "_never",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "allowJs": true,
+    "checkJs": true,
+    "removeComments": true,
+    "importHelpers": true,
+    "preserveConstEnums": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+

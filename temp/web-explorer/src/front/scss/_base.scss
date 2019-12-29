@@ -1,0 +1,73 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: var(--line-height);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+hr {
+  margin: 1rem 0;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: var(--line-height);
+}
+
+hgroup {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+  > * {
+    margin: 0;
+  }
+}
+
+a, .app-link {
+  cursor: pointer;
+  color: var(--link-color);
+  text-decoration: none;
+
+  &:hover, &:active, &:focus {
+    text-decoration: underline;
+  }
+}
+
+p, pre {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+pre {
+  overflow: auto;
+}
+
+code, samp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.825rem;
+}
+
+pre, code {
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  background-color: var(--bg-color-light);
+}
+
+pre code {
+  padding: initial;
+  border-radius: initial;
+  border: initial;
+  background-color: initial;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+.app-no-margin-top {
+  margin-top: 0 !important;
+}

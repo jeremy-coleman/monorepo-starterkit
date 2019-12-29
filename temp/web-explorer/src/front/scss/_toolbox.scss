@@ -1,0 +1,20 @@
+.app-toolbox {
+  display: flex;
+  justify-content: center;
+  line-height: 3rem;
+
+  a.app-action {
+    padding: 0 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all var(--transition-duration) ease;
+
+    &.app-action--active {
+      color: var(--link-color);
+    }
+
+    .fas {
+      vertical-align: middle;
+    }
+  }
+}

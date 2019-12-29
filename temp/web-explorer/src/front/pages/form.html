@@ -1,0 +1,88 @@
+<form>
+  <button>button</button>
+
+  <fieldset>
+    <legend>legend</legend>
+    <label>label
+      <input>
+    </label>
+    <br>
+    <label>label
+      <input>
+    </label>
+  </fieldset>
+
+  <label for="input">Input</label>
+  <input id="input" type="range" min="0" max="100" step="5" value="50">
+
+  <meter id="meter" min="0" max="100" value="50" low="30" high="70">5 degrees</meter>
+
+  <progress id="progress" value="50" max="100">50 %</progress>
+  <output id="output" name="result">50</output>
+
+  <select>
+    <optgroup label="Group 1">
+      <option>1</option>
+      <option>2</option>
+    </optgroup>
+    <optgroup label="Group 2">
+      <option>3</option>
+      <option>4</option>
+    </optgroup>
+  </select>
+
+  <label for="myBrowser">Choose a browser from this list:</label>
+  <input list="browsers" id="myBrowser" name="myBrowser">
+  <datalist id="browsers">
+    <option value="Chrome">
+    <option value="Firefox">
+    <option value="Internet Explorer">
+    <option value="Opera">
+    <option value="Safari">
+    <option value="Microsoft Edge">
+  </datalist>
+
+  <hr>
+
+  <input type="text">
+  <input type="button" value="Button">
+  <input type="checkbox">
+  <input type="radio">
+  <input type="color">
+  <input type="date">
+  <input type="datetime-local">
+  <input type="email">
+  <input type="file">
+  <input type="hidden">
+  <input type="image" src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png">
+  <input type="month">
+  <input type="number">
+  <input type="password" value="123">
+
+  <input type="range">
+  <input type="reset" value="Reset">
+  <input type="search" value="Search">
+  <input type="tel">
+  <input type="time">
+  <input type="url">
+  <input type="week">
+
+</form>
+
+<script>
+  input.addEventListener('input', () => {
+    meter.value = input.value;
+    progress.value = input.value;
+    output.value = input.value;
+  });
+</script>
+
+<label for="myfile" style="cursor:pointer">Choose a file</label>
+<input id="myfile" type="file" style="display:none">
+<output id="myfileOutput" style="font-size:0.8em"></output>
+
+<script>
+  myfile.addEventListener('change', function( event ) {
+    myfileOutput.value = '(' + this.value.replace(/\\/g, '/').split('/').pop() + ')';
+});
+</script>

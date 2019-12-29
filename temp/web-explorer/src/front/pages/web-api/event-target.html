@@ -1,0 +1,52 @@
+<h1 class="app-no-margin-top">EventTarget</h1>
+
+<p>
+  The browser is an <em>"event-driven"</em> programming environment.
+  In this section, we will learn how to define DOM events and respond to them.
+</p>
+
+<div app-playground>
+  <button id="hello">Click me!</button>
+</div>
+
+Select the element and define the event handler.
+
+<script app-playground="click-handler">
+  var hello = document.getElementById('hello');
+
+  function clickHandler(event) {
+    Playground.log(`Event: "${event.type}" | Element: "${this.nodeName}"`);
+  }
+</script>
+
+Add the click handler to the element.
+
+<script app-playground app-script-defer>
+  hello.addEventListener('click', clickHandler);
+</script>
+
+Remove the click handler from the element.
+
+<script app-playground app-script-defer>
+  hello.removeEventListener('click', clickHandler);
+</script>
+
+Add an handler for a user-defined event called <code>wow</code> and dispatch that event without or with <code>detail</code>.
+
+<script app-playground app-script-defer>
+  function wowHandler(event) {
+    const detail = JSON.stringify(event.detail);
+    Playground.log(`Event: "${event.type}" | Element: "${this.nodeName}" | Detail: ${detail}`);
+  }
+
+  hello.addEventListener('wow', wowHandler);
+
+  // Dispatch a simple event
+  var wow = new Event('wow');
+  hello.dispatchEvent(wow);
+
+  // Dispatch a custom event that let's you pass detail
+  var detail = { ok: true };
+  var wow = new CustomEvent('wow', { detail });
+  hello.dispatchEvent(wow);
+</script>

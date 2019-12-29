@@ -1,0 +1,13 @@
+  let methods: {
+    alternative: generateAlternative,
+    anchor: generateAnchor,
+    characterClass: generateCharacterClass,
+    characterClassEscape: generateCharacterClassEscape,
+    characterClassRange: generateCharacterClassRange,
+    disjunction: generateDisjunction,
+    dot: generateDot,
+    group: generateGroup,
+    quantifier: generateQuantifier,
+    reference: generateReference,
+    value: generateValue,
+  }

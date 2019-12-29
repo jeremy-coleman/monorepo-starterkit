@@ -1,0 +1,15 @@
+{
+  "name": "WebExplorer",
+  "short_name": "WebExplorer",
+  "start_url": "./",
+  "lang": "en",
+  "orientation": "any",
+  "display": "standalone",
+  "theme_color": "dodgerblue",
+  "background_color": "dodgerblue",
+  "icons": [{
+    "src": "assets/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}

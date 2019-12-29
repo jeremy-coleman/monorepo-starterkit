@@ -1,0 +1,75 @@
+{
+  "name": "web-explorer",
+  "version": "0.5.0",
+  "description": "Web cookbook",
+  "main": "index.js",
+  "scripts": {
+    "clean": "shx rm -rf dist/",
+    "watch:front": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
+    "watch:back": "webpack --config ./webpack-back.config.ts --debug --watch --env.dev",
+    "watch": "concurrently \"npm run watch:front\" \"npm run watch:back\"",
+    "build:front": "webpack --config ./webpack-front.config.ts",
+    "build:back": "webpack --config ./webpack-back.config.ts",
+    "build": "npm run build:front && npm run build:back",
+    "start:watch": "nodemon dist/back/app.js --watch ./dist/back",
+    "start:watch:src": "nodemon --exec \"./node_modules/.bin/ts-node\" src/back/ts/app.ts --watch ./src/back",
+    "start:mock": "webpack-dev-server --config ./webpack-front.config.ts",
+    "start": "node dist/back/app.js",
+    "preserve:dev": "npm run clean && shx mkdir -p dist/back && shx touch dist/back/app.js",
+    "serve:dev": "concurrently \"npm run watch:front\" \"npm run watch:back\" \"npm run start:watch\"",
+    "serve:prod": "npm run clean && npm run build && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avine/web-explorer.git"
+  },
+  "keywords": [
+    "html5",
+    "css3",
+    "es6-javascript",
+    "web",
+    "standard"
+  ],
+  "author": "Stéphane Francel <contact@avine.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avine/web-explorer/issues"
+  },
+  "homepage": "https://github.com/avine/web-explorer#readme",
+  "devDependencies": {
+    "@types/clean-webpack-plugin": "^0.1.2",
+    "@types/copy-webpack-plugin": "^4.4.2",
+    "@types/html-webpack-plugin": "^3.2.0",
+    "@types/mini-css-extract-plugin": "^0.2.0",
+    "@types/node": "^10.7.1",
+    "@types/prismjs": "^1.9.0",
+    "@types/webpack": "^4.4.10",
+    "@types/webpack-manifest-plugin": "^1.3.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "concurrently": "^3.6.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.3",
+    "sass-loader": "^7.1.0",
+    "shx": "^0.3.2",
+    "style-loader": "^0.22.1",
+    "ts-loader": "^4.5.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-manifest-plugin": "^2.0.3"
+  },
+  "dependencies": {
+    "prismjs": "^1.15.0"
+  }
+}

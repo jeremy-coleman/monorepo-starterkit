@@ -1,0 +1,47 @@
+<details>
+  <p>Requires a computer running an operating system. The computer must have some memory and ideally some kind of long-term
+    storage. An input device as well as some form of output device is recommended.
+  </p>
+</details>
+
+<dialog id="favDialog">
+  <form method="dialog">
+    <section>
+      <p>
+        <label for="favAnimal">Favorite animal:</label>
+        <select id="favAnimal">
+          <option></option>
+          <option>Brine shrimp</option>
+          <option>Red panda</option>
+          <option>Spider monkey</option>
+        </select>
+      </p>
+    </section>
+    <menu>
+      <button id="cancel" type="reset">Cancel</button>
+      <button type="submit">Confirm</button>
+    </menu>
+  </form>
+</dialog>
+
+<menu>
+  <button id="updateDetails">Update details</button>
+</menu>
+
+<script>
+  (function () {
+    var updateButton = document.getElementById('updateDetails');
+    var cancelButton = document.getElementById('cancel');
+    var favDialog = document.getElementById('favDialog');
+
+    // Update button opens a modal dialog
+    updateButton.addEventListener('click', function () {
+      favDialog.showModal();
+    });
+
+    // Form cancel button closes the dialog box
+    cancelButton.addEventListener('click', function () {
+      favDialog.close();
+    });
+  })();
+</script>

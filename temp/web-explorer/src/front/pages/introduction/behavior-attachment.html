@@ -1,0 +1,97 @@
+<h1 class="app-no-margin-top">Behavior attachment</h1>
+
+<p>In this section, we will learn different ways to attach CSS and JavaScript behaviors to the DOM.</p>
+
+
+
+<h2>Inline attachment</h2>
+
+<p>
+  You can attach CSS and JavaScript behaviors directly to the tags.
+  In this case, you don't need a selector for targeting the element you want to attach the behavior to.
+</p>
+
+<div app-playground="demo1">
+  <button
+    style="color:red;"
+    onclick="
+      Playground.log(`Element: ${this.nodeName}`, 'demo1');
+      Playground.log(`Event: ${event.type}`, 'demo1');
+    ">
+    Click me!
+  </button>
+</div>
+
+<p>
+  Here we are using the <code>style</code> attribute to define the button style,
+  and the <code>onclick</code> attribute to define the click event handler.
+</p>
+
+<p>
+  Notice the <code>onclick</code> attribute value:
+  <code>this</code> refers to the <em>button</em> element itself and <code>event</code> refers to the <em>click</em> event that occured.
+</p>
+
+
+
+<h2>External attachment</h2>
+
+<p>You can attach CSS and JavaScript behaviors using DOM selectors.</p>
+
+<div app-playground="demo2">
+  <button id="button2">
+    Click me!
+  </button>
+</div>
+
+<p>Here we define an <code>id</code> attribute that will allow us to select the button element.</p>
+
+<style app-playground>
+  #button2 { color: red; }
+</style>
+
+<p>In CSS, <code>#button2</code> is the selector of the element whose attribute <code>id</code> is <code>button2</code>.</p>
+
+<script app-playground>
+  var button2 = document.getElementById('button2');
+  button2.addEventListener('click', function (event) {
+    Playground.log(`Element: ${this.nodeName}`, 'demo2');
+    Playground.log(`Event: ${event.type}`, 'demo2');
+  });
+</script>
+
+<p>
+  In JavaScript, the equivalent selector is <code>document.getElementById('button2')</code>.
+  Then we use the <code>.addEventListener</code> method to handle the <em>click</em> event.
+  Notice that in the callback function <code>this</code> refers to the <em>button</em> element itself.
+</p>
+
+
+
+<h2>DOM element inheritance</h2>
+
+<p>You learned that the DOM is accessible via CSS or JavaScript.</p>
+
+<p>But in the end, what is the DOM?</p>
+
+<p>
+  To put it simply, the living DOM is a set of tags organized into a tree.<br>
+  And from the JavaScript point of view, each tag is an object with properties and methods.
+</p>
+
+<p>For example, here is the class inheritance of the following <code>&lt;input&gt;</code> tag.</p>
+
+<div app-playground="demo3">
+  <input type="text" value="Hello World!" id="demo3">
+</div>
+
+<script app-playground app-script-defer>
+  var proto = document.getElementById('demo3');
+  while (proto = Object.getPrototypeOf(proto)) {
+    Playground.log(proto.constructor.name, 'demo3');
+  };
+</script>
+
+<p>As you can see, under the hood, there's a strong typing in there!</p>
+
+<p>Open the browser console and find the following informations in <em>"Elements > Properties"</em> tab.</p>

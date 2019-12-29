@@ -1,0 +1,38 @@
+{
+  "name": "@coglite/browserify",
+  "version": "0.0.1",
+  "description": "Meriyahified browserify",
+  "repository": "https://github.com",
+  "author": "Jeremy Coleman",
+  "license": "ICS",
+  "scripts": {
+    "start": "sucrase-node server",
+    "dist": "cross-env NODE_ENV=production sucrase-node webprod",
+    "rollit": "rollup -c rollup.config.js",
+    "tscheck": "tsc -p tsconfig.json --outDir _tscheck"
+  },
+  "dependencies": {
+    "lodash": "4.17.15",
+    "mobx": "5.13.0",
+    "mobx-react": "6.1.3",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "tslib": "1.10.0",
+    "when-switch": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.14.137",
+    "@types/node": "12.7.2",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "acorn": "7.1.0",
+    "acorn-node": "1.8.2",
+    "debug": "^4.1.1",
+    "lodash": "4.17.15",
+    "meriyah": "1.7.2",
+    "prettier": "1.18.2",
+    "sucrase": "3.10.1",
+    "terser": "4.3.2",
+    "typescript": "3.6.2"
+  }
+}

@@ -1,0 +1,845 @@
+import { classNamesFunction, IsFocusVisibleClassName, IStyle, IStyleFunctionOrObject, styled, mergeStyleSets, concatStyleSets, IProcessedStyleSet } from "@uifabric/styleguide"
+import { FontSizes, getGlobalClassNames, HighContrastSelector, ITheme, getTheme } from "@uifabric/styleguide"
+import {
+  getId,
+  initializeComponentRef,
+  IRefObject,
+  IRenderFunction,
+  mergeAriaAttributeValues,
+  warnMutuallyExclusive
+} from "@uifabric/styleguide"
+import * as React from "react"
+import { Icon, IIconProps } from "./Icon"
+import { IKeytipProps } from "./Keytip"
+import { KeytipData } from "./KeytipData"
+
+export interface ICheckboxState {
+  /** Is true when Uncontrolled control is checked. */
+  isChecked?: boolean
+}
+
+
+export class Checkbox extends React.Component<ICheckboxProps, ICheckboxState> implements ICheckbox {
+  public static defaultProps: ICheckboxProps = {
+    boxSide: "start"
+  }
+
+  private _checkBox = React.createRef<HTMLInputElement>()
+  private _id: string
+  _classNames: IProcessedStyleSet<ICheckboxStyles>
+  
+  //{ [key in keyof ICheckboxStyles]: string }
+
+  public static getDerivedStateFromProps(props: ICheckboxProps, state: ICheckboxState): ICheckboxState {
+    if (props.checked !== undefined) {
+      return {
+        ...state,
+        isChecked: !!props.checked
+      }
+    }
+    return state
+  }
+
+  constructor(props: ICheckboxProps, context?: any) {
+    super(props, context)
+
+    initializeComponentRef(this)
+
+    // if (typeof process !== "undefined" && process.env.NODE_ENV !== "production") {
+    //   warnMutuallyExclusive("Checkbox", props, {
+    //     checked: "defaultChecked"
+    //   })
+    // }
+
+    this._id = this.props.id || getId("checkbox-")
+    this.state = {
+      isChecked: !!(props.checked !== undefined ? props.checked : props.defaultChecked)
+    }
+  }
+
+  /**
+   * Render the Checkbox based on passed props
+   */
+  public render(): JSX.Element {
+    const {
+      checked,
+      className,
+      defaultChecked,
+      disabled,
+      inputProps,
+      name,
+      boxSide,
+      theme =getTheme(),
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
+      styles,
+      onRenderLabel = this._onRenderLabel,
+      checkmarkIconProps,
+      ariaPositionInSet,
+      ariaSetSize,
+      keytipProps,
+      title
+    } = this.props
+
+    const isChecked = checked === undefined ? this.state.isChecked : checked
+    const isReversed = boxSide !== "start" ? true : false
+    const isUsingCustomLabelRender = onRenderLabel !== this._onRenderLabel
+    // classNamesFunction<ICheckboxStyleProps, ICheckboxStyles>()(styles!, {
+    this._classNames = mergeStyleSets(CheckboxStyles({
+        theme,
+        styles,
+        className,
+        disabled,
+        checked: isChecked,
+        reversed: isReversed,
+        onRenderLabel: isUsingCustomLabelRender
+    }))
+
+    return (
+      <KeytipData keytipProps={keytipProps} disabled={disabled}>
+        {(keytipAttributes: any): JSX.Element => (
+          <div className={this._classNames.root}>
+            <input
+              type="checkbox"
+              {...inputProps}
+              data-ktp-execute-target={keytipAttributes["data-ktp-execute-target"]}
+              {...(checked !== undefined && { checked })}
+              {...(defaultChecked !== undefined && { defaultChecked })}
+              disabled={disabled}
+              className={this._classNames.input}
+              ref={this._checkBox}
+              name={name}
+              id={this._id}
+              title={title}
+              onChange={this._onChange}
+              onFocus={this._onFocus}
+              onBlur={this._onBlur}
+              aria-disabled={disabled}
+              aria-label={ariaLabel}
+              aria-labelledby={ariaLabelledBy}
+              aria-describedby={mergeAriaAttributeValues(ariaDescribedBy, keytipAttributes["aria-describedby"])}
+              aria-posinset={ariaPositionInSet}
+              aria-setsize={ariaSetSize}
+            />
+            <label className={this._classNames.label} htmlFor={this._id}>
+              <div className={this._classNames.checkbox} data-ktp-target={keytipAttributes["data-ktp-target"]}>
+                <Icon iconName="CheckMark" {...checkmarkIconProps} className={this._classNames.checkmark} />
+              </div>
+              {onRenderLabel}
+            </label>
+          </div>
+        )}
+      </KeytipData>
+    )
+  }
+
+  public get checked(): boolean {
+    return this.state.isChecked!
+  }
+
+  public focus(): void {
+    if (this._checkBox.current) {
+      this._checkBox.current.focus()
+    }
+  }
+
+  private _onFocus = (ev: React.FocusEvent<HTMLElement>): void => {
+    const { inputProps } = this.props
+
+    if (inputProps && inputProps.onFocus) {
+      inputProps.onFocus(ev)
+    }
+  }
+
+  private _onBlur = (ev: React.FocusEvent<HTMLElement>): void => {
+    const { inputProps } = this.props
+
+    if (inputProps && inputProps.onBlur) {
+      inputProps.onBlur(ev)
+    }
+  }
+
+  private _onChange = (ev: React.FormEvent<HTMLElement>): void => {
+    const { disabled, onChange } = this.props
+    const { isChecked } = this.state
+
+    if (!disabled) {
+      if (onChange) {
+        onChange(ev, !isChecked)
+      }
+
+      if (this.props.checked === undefined) {
+        this.setState({ isChecked: !isChecked })
+      }
+    }
+  }
+
+  private _onRenderLabel = (props: ICheckboxProps): JSX.Element | null => {
+    const { label } = props
+
+    return label ? <span className={this._classNames.text}>{label}</span> : null
+  }
+}
+
+const GlobalClassNames = {
+  root: "ms-Checkbox",
+  label: "ms-Checkbox-label",
+  checkbox: "ms-Checkbox-checkbox",
+  checkmark: "ms-Checkbox-checkmark",
+  text: "ms-Checkbox-text"
+}
+
+const MS_CHECKBOX_LABEL_SIZE = "20px"
+const MS_CHECKBOX_TRANSITION_DURATION = "200ms"
+const MS_CHECKBOX_TRANSITION_TIMING = "cubic-bezier(.4, 0, .23, 1)"
+
+let things = ({ className, theme, reversed, checked, disabled, onRenderLabel, boxSide ="start" }) => {
+    //let theme = getTheme()
+    const { semanticColors, effects, palette } = theme
+    const classNames = getGlobalClassNames(GlobalClassNames, theme)
+  
+    const checkmarkFontColor = semanticColors.inputForegroundChecked
+    // TODO: after updating the semanticColors slots mapping this needs to be semanticColors.inputBorder
+    const checkmarkFontColorHovered = palette.neutralSecondary
+    // TODO: after updating the semanticColors slots mapping this needs to be semanticColors.smallInputBorder
+    const checkboxBorderColor = palette.neutralPrimary
+    const checkboxBorderColorChecked = semanticColors.inputBackgroundChecked
+    const checkboxBorderColorDisabled = semanticColors.disabledBodySubtext
+    const checkboxBorderHoveredColor = semanticColors.inputBorderHovered
+    const checkboxBackgroundChecked = semanticColors.inputBackgroundChecked
+    // TODO: after updating the semanticColors slots mapping following 2 tokens need to be semanticColors.inputBackgroundCheckedHovered
+    const checkboxBackgroundCheckedHovered = palette.themeDark
+    const checkboxBorderColorCheckedHovered = palette.themeDark
+    const checkboxHoveredTextColor = semanticColors.inputTextHovered
+    const checkboxBackgroundDisabledChecked = semanticColors.disabledBodySubtext
+    const checkboxTextColor = semanticColors.bodyText
+    const checkboxTextColorDisabled = semanticColors.disabledText
+  
+    //let isChecked = checked === undefined ? this.state.isChecked : checked
+    //let isReversed = boxSide !== "start" ? true : false
+    let isUsingCustomLabelRender = onRenderLabel //!== this._onRenderLabel
+    
+}
+
+let theme = getTheme()
+let CheckboxGlobals = getGlobalClassNames(GlobalClassNames, theme)
+
+// export const CheckboxStylesheet = ({ className, theme, reversed, checked, disabled, onRenderLabel, styles, boxSide ="start" }) => mergeStyleSets({
+//     root: [
+//       props.styles.root,
+//       CheckboxGlobals.root,
+//       {
+//         position: "relative",
+//         display: "flex"
+//       },
+//       props.reversed && "reversed",
+//       props.checked && "is-checked",
+//       !props.disabled && "is-enabled",
+//       props.disabled && "is-disabled",
+//       !props.disabled && [
+//         !props.checked && {
+//           selectors: {
+//             ":hover .ms-Checkbox-checkbox": {
+//               borderColor: theme.semanticColors.inputBorderHovered,
+//               selectors: {
+//                 [HighContrastSelector]: {
+//                   borderColor: "Highlight"
+//                 }
+//               }
+//             },
+//             ":focus .ms-Checkbox-checkbox": { borderColor: theme.semanticColors.inputBorderHovered },
+//             ":hover .ms-Checkbox-checkmark": {
+//               color: theme.palette.neutralSecondary,
+//               opacity: "1",
+//               selectors: {
+//                 [HighContrastSelector]: {
+//                   color: "Highlight"
+//                 }
+//               }
+//             }
+//           }
+//         },
+//         props.checked && {
+//           selectors: {
+//             ":hover .ms-Checkbox-checkbox": {
+//               background: theme.palette.themeDark,
+//               borderColor: theme.palette.themeDark
+//             },
+//             ":focus .ms-Checkbox-checkbox": {
+//               background: theme.palette.themeDark,
+//               borderColor: theme.palette.themeDark
+//             },
+//             [HighContrastSelector]: {
+//               selectors: {
+//                 ":hover .ms-Checkbox-checkbox": {
+//                   background: "Window",
+//                   borderColor: "Highlight"
+//                 },
+//                 ":focus .ms-Checkbox-checkbox": {
+//                   background: "Highlight"
+//                 },
+//                 ":focus:hover .ms-Checkbox-checkbox": {
+//                   background: "Highlight"
+//                 },
+//                 ":focus:hover .ms-Checkbox-checkmark": {
+//                   color: "Window"
+//                 },
+//                 ":hover .ms-Checkbox-checkmark": {
+//                   color: "Highlight"
+//                 }
+//               }
+//             }
+//           }
+//         },
+//         {
+//           selectors: {
+//             ":hover .ms-Checkbox-text": { color: theme.semanticColors.inputTextHovered },
+//             ":focus .ms-Checkbox-text": { color: theme.semanticColors.inputTextHovered }
+//           }
+//         }
+//       ],
+//       props.className
+//     ],
+//     input: [
+      
+//       {
+//         position: "absolute",
+//         background: "none",
+
+//         opacity: 0,
+//         selectors: {
+//           [`.${IsFocusVisibleClassName} &:focus + label::before`]: {
+//             outline: "1px solid " + theme.palette.neutralSecondary,
+//             outlineOffset: "2px",
+//             selectors: {
+//               [HighContrastSelector]: {
+//                 outline: "1px solid ActiveBorder"
+//               }
+//             }
+//           }
+//         }
+//       }
+//     ],
+//     label: [
+//       CheckboxGlobals.label,
+//       props.styles.label,
+//       theme.fonts.small,
+//       {
+//         display: "flex",
+//         alignItems: props.isUsingCustomLabelRender ? "center" : "flex-start",
+//         cursor: props.disabled ? "default" : "pointer",
+//         position: "relative",
+//         userSelect: "none",
+//         textAlign: "left"
+//       },
+//       props.reversed && {
+//         flexDirection: "row-reverse",
+//         justifyContent: "flex-end"
+//       },
+//       {
+//         selectors: {
+//           "&::before": {
+//             position: "absolute",
+//             left: 0,
+//             right: 0,
+//             top: 0,
+//             bottom: 0,
+//             content: '""',
+//             pointerEvents: "none"
+//           }
+//         }
+//       }
+//     ],
+//     checkbox: [
+//       CheckboxGlobals.checkbox,
+//       props.styles.checkbox,
+//       {
+//         display: "flex",
+//         flexShrink: 0,
+//         alignItems: "center",
+//         justifyContent: "center",
+//         height: MS_CHECKBOX_LABEL_SIZE,
+//         width: MS_CHECKBOX_LABEL_SIZE,
+//         border: `1px solid ${theme.palette.neutralPrimary}`,
+//         borderRadius: theme.effects.roundedCorner2,
+//         boxSizing: "border-box",
+//         transitionProperty: "background, border, border-color",
+//         transitionDuration: MS_CHECKBOX_TRANSITION_DURATION,
+//         transitionTimingFunction: MS_CHECKBOX_TRANSITION_TIMING,
+
+//         /* in case the icon is bigger than the box */
+//         overflow: "hidden"
+//       },
+//       !props.reversed
+//         ? // this margin on the checkbox is for backwards compat.
+//           // notably it has the effect where a customRender is used, there will be only a 4px margin from checkbox to label.
+//           // the label by default would have another 4px margin for a total of 8px margin between checkbox and label.
+//           // we don't combine the two (and move it into the text) to not incur a breaking change for everyone using custom render atm.
+//           {
+//             marginRight: 4
+//           }
+//         : {
+//             marginLeft: 4
+//           },
+//       !props.disabled &&
+//       props.checked && {
+//           background: theme.semanticColors.inputBackgroundChecked,
+//           borderColor: theme.semanticColors.inputBackgroundChecked,
+//           selectors: {
+//             [HighContrastSelector]: {
+//               background: "Highlight",
+//               borderColor: "Highlight"
+//             }
+//           }
+//         },
+//         props.disabled && {
+//         borderColor: theme.semanticColors.disabledBodySubtext,
+//         selectors: {
+//           [HighContrastSelector]: {
+//             borderColor: "InactiveBorder"
+//           }
+//         }
+//       },
+//       props.checked &&
+//       props.disabled && {
+//           background: theme.semanticColors.disabledBodySubtext,
+//           borderColor: theme.semanticColors.disabledBodySubtext
+//         }
+//     ],
+//     checkmark: [
+//       CheckboxGlobals.checkmark,
+//       props.styles.checkmark,
+//       {
+//         opacity: props.checked ? "1" : "0",
+//         color: theme.semanticColors.inputForegroundChecked,
+//         selectors: {
+//           [HighContrastSelector]: {
+//             color: props.disabled ? "InactiveBorder" : "Window",
+//             MsHighContrastAdjust: "none"
+//           }
+//         }
+//       }
+//     ],
+//     text: [
+//       CheckboxGlobals.text,
+//       props.styles.text,
+//       {
+//         color: props.disabled ? theme.semanticColors.disabledText : theme.semanticColors.bodyText,
+//         fontSize: FontSizes.small,
+//         lineHeight: "20px"
+//       },
+//       !props.reversed
+//         ? {
+//             marginLeft: 4
+//           }
+//         : {
+//             marginRight: 4
+//           },
+//           props.disabled && {
+//         selectors: {
+//           [HighContrastSelector]: {
+//             // backwards compat for the color of the text when the checkbox was rendered
+//             // using a Button.
+//             color: "InactiveBorder"
+//           }
+//         }
+//       }
+//     ]
+// })
+
+// export const Checkbox1: React.FunctionComponent<ICheckboxProps> = styled<ICheckboxProps, ICheckboxStyleProps, ICheckboxStyles>(
+//   CheckboxBase,
+//   getCheckboxStyles,
+//   undefined,
+//   { scope: "Checkbox" }
+// )
+
+
+export const CheckboxStyles = ({ theme, className, reversed, checked, disabled, onRenderLabel, styles }) => concatStyleSets({
+  root: [
+    styles.root,
+    CheckboxGlobals.root,
+    {
+      position: "relative",
+      display: "flex"
+    },
+    reversed && "reversed",
+    checked && "is-checked",
+    !disabled && "is-enabled",
+    disabled && "is-disabled",
+    !disabled && [
+      !checked && {
+        selectors: {
+          ":hover .ms-Checkbox-checkbox": {
+            borderColor: theme.semanticColors.inputBorderHovered,
+            selectors: {
+              [HighContrastSelector]: {
+                borderColor: "Highlight"
+              }
+            }
+          },
+          ":focus .ms-Checkbox-checkbox": { borderColor: theme.semanticColors.inputBorderHovered },
+          ":hover .ms-Checkbox-checkmark": {
+            color: theme.palette.neutralSecondary,
+            opacity: "1",
+            selectors: {
+              [HighContrastSelector]: {
+                color: "Highlight"
+              }
+            }
+          }
+        }
+      },
+      checked && {
+        selectors: {
+          ":hover .ms-Checkbox-checkbox": {
+            background: theme.palette.themeDark,
+            borderColor: theme.palette.themeDark
+          },
+          ":focus .ms-Checkbox-checkbox": {
+            background: theme.palette.themeDark,
+            borderColor: theme.palette.themeDark
+          },
+          [HighContrastSelector]: {
+            selectors: {
+              ":hover .ms-Checkbox-checkbox": {
+                background: "Window",
+                borderColor: "Highlight"
+              },
+              ":focus .ms-Checkbox-checkbox": {
+                background: "Highlight"
+              },
+              ":focus:hover .ms-Checkbox-checkbox": {
+                background: "Highlight"
+              },
+              ":focus:hover .ms-Checkbox-checkmark": {
+                color: "Window"
+              },
+              ":hover .ms-Checkbox-checkmark": {
+                color: "Highlight"
+              }
+            }
+          }
+        }
+      },
+      {
+        selectors: {
+          ":hover .ms-Checkbox-text": { color: theme.semanticColors.inputTextHovered },
+          ":focus .ms-Checkbox-text": { color: theme.semanticColors.inputTextHovered }
+        }
+      }
+    ],
+    className
+  ],
+  input: [
+    
+    {
+      position: "absolute",
+      background: "none",
+
+      opacity: 0,
+      selectors: {
+        [`.${IsFocusVisibleClassName} &:focus + label::before`]: {
+          outline: "1px solid " + theme.palette.neutralSecondary,
+          outlineOffset: "2px",
+          selectors: {
+            [HighContrastSelector]: {
+              outline: "1px solid ActiveBorder"
+            }
+          }
+        }
+      }
+    }
+  ],
+  label: [
+    CheckboxGlobals.label,
+    styles.label,
+    theme.fonts.small,
+    {
+      display: "flex",
+      alignItems: onRenderLabel ? "center" : "flex-start",
+      cursor: disabled ? "default" : "pointer",
+      position: "relative",
+      userSelect: "none",
+      textAlign: "left"
+    },
+    reversed && {
+      flexDirection: "row-reverse",
+      justifyContent: "flex-end"
+    },
+    {
+      selectors: {
+        "&::before": {
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          content: '""',
+          pointerEvents: "none"
+        }
+      }
+    }
+  ],
+  checkbox: [
+    CheckboxGlobals.checkbox,
+    styles.checkbox,
+    {
+      display: "flex",
+      flexShrink: 0,
+      alignItems: "center",
+      justifyContent: "center",
+      height: MS_CHECKBOX_LABEL_SIZE,
+      width: MS_CHECKBOX_LABEL_SIZE,
+      border: `1px solid ${theme.palette.neutralPrimary}`,
+      borderRadius: theme.effects.roundedCorner2,
+      boxSizing: "border-box",
+      transitionProperty: "background, border, border-color",
+      transitionDuration: MS_CHECKBOX_TRANSITION_DURATION,
+      transitionTimingFunction: MS_CHECKBOX_TRANSITION_TIMING,
+
+      /* in case the icon is bigger than the box */
+      overflow: "hidden"
+    },
+    !reversed
+      ? // this margin on the checkbox is for backwards compat.
+        // notably it has the effect where a customRender is used, there will be only a 4px margin from checkbox to label.
+        // the label by default would have another 4px margin for a total of 8px margin between checkbox and label.
+        // we don't combine the two (and move it into the text) to not incur a breaking change for everyone using custom render atm.
+        {
+          marginRight: 4
+        }
+      : {
+          marginLeft: 4
+        },
+    !disabled &&
+    checked && {
+        background: theme.semanticColors.inputBackgroundChecked,
+        borderColor: theme.semanticColors.inputBackgroundChecked,
+        selectors: {
+          [HighContrastSelector]: {
+            background: "Highlight",
+            borderColor: "Highlight"
+          }
+        }
+      },
+      disabled && {
+      borderColor: theme.semanticColors.disabledBodySubtext,
+      selectors: {
+        [HighContrastSelector]: {
+          borderColor: "InactiveBorder"
+        }
+      }
+    },
+    checked &&
+    disabled && {
+        background: theme.semanticColors.disabledBodySubtext,
+        borderColor: theme.semanticColors.disabledBodySubtext
+      }
+  ],
+  checkmark: [
+    CheckboxGlobals.checkmark,
+    styles.checkmark,
+    {
+      opacity: checked ? "1" : "0",
+      color: theme.semanticColors.inputForegroundChecked,
+      selectors: {
+        [HighContrastSelector]: {
+          color: disabled ? "InactiveBorder" : "Window",
+          MsHighContrastAdjust: "none"
+        }
+      }
+    }
+  ],
+  text: [
+    CheckboxGlobals.text,
+    styles.text,
+    {
+      color: disabled ? theme.semanticColors.disabledText : theme.semanticColors.bodyText,
+      fontSize: FontSizes.small,
+      lineHeight: "20px"
+    },
+    !reversed
+      ? {
+          marginLeft: 4
+        }
+      : {
+          marginRight: 4
+        },
+        disabled && {
+      selectors: {
+        [HighContrastSelector]: {
+          // backwards compat for the color of the text when the checkbox was rendered
+          // using a Button.
+          color: "InactiveBorder"
+        }
+      }
+    }
+  ]
+})
+
+export type ICheckboxStyles = Partial<ReturnType<typeof CheckboxStyles>>
+//const CheckboxStylesheet = mergeStyleSets(CheckboxStyles)
+
+export interface ICheckbox {
+  /** Gets the current checked state. */
+  checked: boolean
+
+  /** Sets focus to the checkbox. */
+  focus: () => void
+}
+
+/**
+ * Checkbox properties.
+ * {@docCategory Checkbox}
+ */
+export interface ICheckboxProps extends React.ButtonHTMLAttributes<HTMLElement | HTMLInputElement> {
+  /**
+   * Optional callback to access the ICheckbox interface. Use this instead of ref for accessing
+   * the public methods and properties of the component.
+   */
+  componentRef?: IRefObject<ICheckbox>
+
+  /**
+   * Additional class name to provide on the root element, in addition to the ms-Checkbox class.
+   */
+  className?: string
+
+  /**
+   * Checked state. Mutually exclusive to "defaultChecked". Use this if you control the checked state at a higher
+   * level and plan to pass in the correct value based on handling onChange events and re-rendering.
+   */
+  checked?: boolean
+
+  /**
+   * Default checked state. Mutually exclusive to "checked". Use this if you want an uncontrolled component, and
+   * want the Checkbox instance to maintain its own state.
+   */
+  defaultChecked?: boolean
+
+  /**
+   * Label to display next to the checkbox.
+   */
+  label?: string
+
+  /**
+   * Disabled state of the checkbox.
+   */
+  disabled?: boolean
+
+  /**
+   * Callback that is called when the checked value has changed.
+   */
+  onChange?: (ev?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void
+
+  /**
+   * Optional input props that will be mixed into the input element, *before* other props are applied. This allows
+   * you to extend the input element with additional attributes, such as data-automation-id needed for automation.
+   * Note that if you provide, for example, "disabled" as well as "inputProps.disabled", the former will take
+   * precedence over the later.
+   */
+  inputProps?: React.ButtonHTMLAttributes<HTMLElement | HTMLButtonElement>
+
+  /**
+   * Allows you to set the checkbox to be at the before (start) or after (end) the label.
+   * @defaultvalue 'start'
+   */
+  boxSide?: "start" | "end"
+
+  /**
+   * Theme provided by HOC.
+   */
+  theme?: ITheme
+
+  /**
+   * Accessible label for the checkbox.
+   */
+  ariaLabel?: string
+
+  /**
+   * ID for element that contains label information for the checkbox.
+   */
+  ariaLabelledBy?: string
+
+  /**
+   * ID for element that provides extended information for the checkbox.
+   */
+  ariaDescribedBy?: string
+
+  /**
+   * The position in the parent set (if in a set) for aria-posinset.
+   */
+  ariaPositionInSet?: number
+
+  /**
+   * The total size of the parent set (if in a set) for aria-setsize.
+   */
+  ariaSetSize?: number
+
+  /**
+   * Call to provide customized styling that will layer on top of the variant rules.
+   */
+  styles?: ICheckboxStyles //IStyleFunctionOrObject<ICheckboxStyleProps, ICheckboxStyles>
+
+  /**
+   * Custom render function for the label.
+   */
+  onRenderLabel?: IRenderFunction<ICheckboxProps>
+
+  /**
+   * Custom icon props for the check mark rendered by the checkbox
+   */
+  checkmarkIconProps?: IIconProps
+
+  /**
+   * Optional keytip for this checkbox
+   */
+  keytipProps?: IKeytipProps
+}
+
+
+// export interface ICheckboxStyleProps {
+//   onRenderLabel?: any
+//   boxSide?: any
+//   theme: ITheme
+//   className?: string
+//   disabled?: boolean
+//   checked?: boolean
+//   reversed?: boolean
+//   isUsingCustomLabelRender: boolean
+// }
+
+
+export interface ICheckboxStyles1 {
+  /**
+   * Style for the root element (a button) of the checkbox component in the default enabled/unchecked state.
+   */
+  root?: IStyle
+
+  /**
+   * INTERNAL: This is mostly an internal implementation detail which you should avoid styling.
+   * This refers to the <input type="checkbox"> element that is typically hidden and not rendered on screen.
+   */
+  input?: IStyle
+
+  /**
+   * Style for the label part (contains the customized checkbox + text) when enabled.
+   */
+  label?: IStyle
+
+  /**
+   * Style for checkbox in its default unchecked/enabled state.
+   */
+  checkbox?: IStyle
+
+  /**
+   * Style for the checkmark in the default enabled/unchecked state.
+   */
+  checkmark?: IStyle
+
+  /**
+   * Style for text appearing with the checkbox in its default enabled state.
+   */
+  text?: IStyle
+}

@@ -1,0 +1,17 @@
+{
+  "name": "tsify-js",
+  "version": "0.0.0",
+  "description": "tsify Sample: JS",
+  "scripts": {
+    "build-cli": "browserify -p [ tsify --allowJs ] src/main.js > public/bundle.js",
+    "build-script": "node ./build.js > public/bundle.js"
+  },
+  "author": "Greg Smith <smr.kyu@gmail.com> (http://github.com/smrq)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "browserify": "^12.0.1",
+    "tsify": "*",
+    "typescript": "~1.8.7"
+  }
+}

@@ -1,0 +1,70 @@
+<h1 class="app-no-margin-top">How it works ?</h1>
+
+<p>To understand how the playground works, click on the button
+  <code><i class="fas fa-code"></i></code>
+  below to view the source code.</p>
+
+<h2>Demo</h2>
+
+<!--
+  Here's the final demo area.
+  Because the playground is named (ie: "my-html"), the source
+  code is displayed after the associated anchor (see below).
+-->
+<div app-playground="my-html">
+  <span id="demo">Click me</span>
+</div>
+
+<!-- Here's the demo styles -->
+<style app-playground="my-css">
+  #demo {
+    background-color: yellow;
+    cursor: pointer;
+  }
+</style>
+
+<!-- Here's the demo js -->
+<script app-playground="my-js">
+  document.getElementById('demo').addEventListener('click', function (e) {
+    e.preventDefault();
+    Playground.log('Hello...', 'my-html');
+  });
+</script>
+
+<h3 app-playground-anchor="my-html">After this anchor comes the <code>HTML</code> source code</h3>
+
+<h3 app-playground-anchor="my-css">After this anchor comes the <code>CSS</code> source code</h3>
+
+<p><em>Click on the action button to toggle the styles.</em></p>
+
+<h3 app-playground-anchor="my-js">After this anchor comes the <code>JS</code> source code.</h3>
+
+<p><em>Notice that this <code>script</code> does NOT have a <code>app-script-defer</code> attribute.
+  It runs immediately.</em></p>
+
+<p><em>Also notice that the global function <code>Playground.log</code> is available to let you log messages easily.</em></p>
+
+<h3>The next <code>script</code> does not have any anchor, thus it is displayed in place.</h3>
+
+<!--
+  The following playground is not named, thus the
+  source code is displayed right after the script.
+-->
+<script app-playground app-script-defer>
+  document.getElementById('demo').addEventListener('click', function (e) {
+    e.preventDefault();
+    Playground.log('...World!', 'my-html');
+  });
+</script>
+
+<p><em>Notice that this <code>script</code> have a <code>app-script-defer</code> attribute.
+  Click on the action button to run it.</em></p>
+
+<p><i class="fa fa-info-circle"></i> You can <em>double-click</em> on a playground to reduce its size :)</p>
+
+<h2>What to do next ?</h2>
+
+<ul>
+  <li>To add new playground, add a new file in the folder <code>/src/front/pages</code>.</li>
+  <li>To add a link to your new playground, edit the file <code>/src/front/pages/sidebar.html</code>.</li>
+</ul>

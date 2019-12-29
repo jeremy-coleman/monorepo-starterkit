@@ -1,0 +1,46 @@
+.app-code--active {
+  display: flex;
+  justify-content: space-between;
+
+  .app-code__source,
+  .app-code__target {
+    flex: 1 1 0;
+    box-sizing: border-box;
+    overflow: auto;
+    margin: 0;
+  }
+
+  .app-code__source {
+    padding-right: 1rem;
+    border: 0 solid var(--border-color);
+    border-width: 0 1px 0 0;
+  }
+
+  .app-code__target { // Note: do not remove `padding-top` and `padding-bottom`
+    padding-right: 0;
+    padding-left: 1rem;
+    border-radius: 0;
+    border: 0 solid var(--bg-color);
+    border-width: 0 0 0 1px;
+    background-color: transparent;
+    line-height: 1em;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .app-code--active {
+    display: block;
+
+    .app-code__source {
+      padding-right: 0;
+      padding-bottom: 1rem;
+      border-width: 0 0 1px 0;
+    }
+
+    .app-code__target {
+      padding-top: 1rem;
+      padding-left: 0;
+      border-width: 1px 0 0 0;
+    }
+  }
+}
