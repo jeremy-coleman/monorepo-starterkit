@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "sourceMap": false,
+        "declaration": false,
+        "module": "commonjs",
+        "target": "esnext",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": false,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck":true,
+        "resolveJsonModule": true,
+        "noImplicitAny": false,
+        "noUnusedParameters": false,
+        "outDir": "dist",
+        "baseUrl": "./src",
+        "esModuleInterop": false,
+        "importHelpers": true,
+        "lib": ["dom", "scripthost", "esnext", "dom.iterable"],
+        "strict": false
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "lib"]
+}

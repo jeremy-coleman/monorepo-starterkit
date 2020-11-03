@@ -20,7 +20,7 @@ const overrides: Overrides = {
 export function defaultTheme(): Theme {
   const palette: PaletteOptions = {
     primary: {
-      main: blue[800],
+      main: blue[900],
     },
     secondary: {
       main: pink.A400,
@@ -32,3 +32,5 @@ export function defaultTheme(): Theme {
   }
   return createMuiTheme({ palette, overrides })
 }
+
+export const DEFAULT_THEME = defaultTheme()

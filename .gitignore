@@ -5,6 +5,7 @@ coverage
 dist
 package-lock.json
 zz
+packages/app-browserify-template/lib
 
 /.idea
 /.vscode

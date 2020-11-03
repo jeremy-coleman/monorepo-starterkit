@@ -17,8 +17,9 @@
     "watch:rollups": "rollup -c rollup.bundles.js -w",
     "watch:app": "lerna run start --scope @coglite/app",
     "bootstrap": "lerna bootstrap --hoist",
+    "install": "lerna bootstrap --hoist",
     "prettify": "pprettier --write packages/*/src/**/{*.js,*.jsx,*.ts,*.tsx}",
-    "update-deps": "lerna exec npx upd --stream --parallel"
+    "updeps": "lerna exec npx upd --stream --parallel"
   },
   "prettier": {
     "printWidth": 120,
