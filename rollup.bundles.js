@@ -1,69 +1,24 @@
 //https://github.com/rollup/awesome
 
+var fs = require('fs')
 var path = require('path')
-var tsc = require('@rollup/plugin-typescript')
-var globalze = require("rollup-plugin-external-globals")
-var jetpack = require('fs-jetpack')
+var tsc = require('./tools/rollup-plugin-typescript-v2')
 
-const MONOREPO_CONSTANTS = {
-  PKG_JSONS: jetpack.find('packages', {
-    matching: ['./*/package.json'],
-    files: true,
-    directories: false,
-  }),
-  SRC_DIRS: jetpack.find('packages', {
-    matching: ['./*/src'],
-    files: false,
-    directories: true,
-  }),
-  LIBS: jetpack.find('packages', {
-    matching: ['./*/lib'],
-    files: false,
-    directories: true,
-  }),
-  PACKAGES: jetpack.find('packages', {
-    matching: ['./*'],
-    recursive: false,
-    files: false,
-    directories: true,
-  }),
-}
 
-/** returns an array (of strings) of all the deps/peerDeps/devDeps in all the package.jsons */
-const MonoPackageDeps = () => {
-  let deps = []
-  MONOREPO_CONSTANTS.PKG_JSONS.forEach((pkgJsonFile) => {
-    let theFileContents = jetpack.read(pkgJsonFile, 'json')
-    deps.push(
-      Object.keys({
-        ...theFileContents.dependencies, 
-        ...theFileContents.devDependences,
-        ...theFileContents.peerDependencies
-      } || {}),
-    )
-  })
-  let uniqueDeps = [...new Set(...deps)]
-  //console.log(uniqueDeps)
-  return uniqueDeps
-}
-
-const EXTERNALS = MonoPackageDeps()
-
-const globals = {
-  react: 'React',
-  'react-dom': 'ReactDOM',
-}
+var EXTERNALS = fs.readdirSync("node_modules")
+let MONOREPO_CONSTANTS_PACKAGES = fs.readdirSync("packages").map(v => `packages/${v}`)
+var ROLLUP_TARGET_PACKAGES = MONOREPO_CONSTANTS_PACKAGES.filter(x => !x.includes("app-"))
 
 async function main() {
-  let results = []
+  let CONFIG_ARRAY = []
 
-  MONOREPO_CONSTANTS.PACKAGES.forEach((pkg) => {
+  ROLLUP_TARGET_PACKAGES.forEach((pkg) => {
     const basePath = path.relative(__dirname, pkg)
     const pkgEntryFileArray = path.join(basePath, 'src/index.ts')
     const LIB_PATH_FRAGMENTS = basePath.split('\\').concat('lib', 'index.js')
     const LIB_OUTPUT_FILE = path.join(__dirname, ...LIB_PATH_FRAGMENTS)
 
-    results.push({
+    CONFIG_ARRAY.push({
       treeshake: {
         moduleSideEffects: false,
         propertyReadSideEffects: false,
@@ -94,10 +49,6 @@ async function main() {
       external: EXTERNALS,
       plugins: [
         tsc(),
-        globalze({
-          jquery: "$",
-          //'react': "React"
-        })
       ],
 
       onwarn: function(message) {
@@ -112,15 +63,7 @@ async function main() {
     })
   })
 
-  return results
+  return CONFIG_ARRAY
 }
 
 module.exports = main()
-
-// const tsFiles = jetpack.find(
-//   'packages', { matching: [
-//     "**/*.js",
-//     "**/*.ts",
-//     "**/*.tsx",
-//     "**/*.jsx"
-// ], files: true, directories: false });

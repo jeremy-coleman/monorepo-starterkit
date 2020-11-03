@@ -23,7 +23,7 @@ const overrides = {
 function defaultTheme() {
     const palette = {
         primary: {
-            main: blue[900],
+            main: blue[800],
         },
         secondary: {
             main: pink.A400,
@@ -36,6 +36,4 @@ function defaultTheme() {
     return createMuiTheme({ palette, overrides });
 }
 
-let deepx = 42;
-
-export { Header, deepx, defaultTheme };
+export { Header, defaultTheme };

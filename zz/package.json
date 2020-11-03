@@ -1,0 +1,51 @@
+{
+  "name": "monorepo-starterkit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React monorepo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myorg/mymonorepo.git"
+  },
+  "license": "MIT",
+  "author": "Jeremy Coleman",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "run-p rollit watch:app",
+    "rollit": "rollup -c rollup.bundles.js -w",
+    "watch:app": "lerna run start --scope @coglite/app",
+    "bootstrap": "lerna bootstrap --hoist",
+    "build": "lerna run build:packages --parallel",
+    "clean": "lerna run clean:packages --parallel",
+    "dist": "run-s clean build rollit",
+    "prettify": "pprettier --write packages/*/src/**/{*.js,*.jsx,*.ts,*.tsx}",
+    "update-deps": "lerna exec npx upd --stream --parallel"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "devDependencies": {
+    "@ampproject/rollup-plugin-closure-compiler": "0.26.0",
+    "rollup-plugin-external-globals": "0.6.1",
+    "@mixer/parallel-prettier": "2.0.0",
+    "@rollup/plugin-alias": "3.1.1",
+    "@rollup/plugin-run": "2.0.2",
+    "@rollup/plugin-typescript": "2.0.1",
+    "@types/node": "14.14.6",
+    "@types/react": "16.9.55",
+    "@types/react-dom": "16.9.9",
+    "fs-jetpack": "4.0.1",
+    "lerna": "3.22.1",
+    "lerna-runner": "0.0.5",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.1.2",
+    "rollup": "2.33.1",
+    "typescript": "4.0.5"
+  }
+}

@@ -1,7 +1,6 @@
 {
   "packages": [
-    "packages/*",
-    "projects/*"
+    "packages/*"
   ],
   "version": "independent",
   "npmClient": "npm"
